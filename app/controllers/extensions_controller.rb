@@ -13,13 +13,6 @@ class ExtensionsController < ApplicationController
   end
 
   def show
-    begin
-      @commits = GitHub::API.commits(@extension.username, @extension.repository).paginate(:page => params[:page], :order => 'committed_date DESC', :per_page => 5) if @extension.github?
-    rescue OpenURI::HTTPError
-      #@extension.update_attribute(:github, false)
-      # Github down?
-      @commits = nil
-    end
   end
 
   def new

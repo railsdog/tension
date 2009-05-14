@@ -29,6 +29,18 @@
 
 </div>
 
+<h3>GitHub Info (If Applicable)</h3>
+  <p>
+  	<%= f.label :github_username, 'User Name'%><br/>
+  	<%= f.text_field :github_username, :size => 40, :class => 'text_field' %>
+  </p>
+  <p>
+  	<%= f.label :github_project, 'Project Name'%><br/>
+  	<%= f.text_field :github_project, :size => 40, :class => 'text_field' %>
+  </p>
+</div>
+
+
 <div class="column span-12  last">
   <p>
     <%= f.label :description, 'Description'%><br/>
@@ -36,9 +48,9 @@
 	<i>you can use Textile in this field</i>
   </p>
 
-<p>
-	<%= f.label :tag_list, 'Tags'%> (separated with commas)<br/>
-	<%= f.text_field :tag_list, :size => 60, :class => 'text_field' %>
-</p>
+  <p>
+  	<%= f.label :tag_list, 'Tags'%> (separated with commas)<br/>
+  	<%= f.text_field :tag_list, :size => 60, :class => 'text_field' %>
+  </p>
 			
 </div>

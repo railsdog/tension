@@ -12,25 +12,12 @@ class Extension < ActiveRecord::Base
   
   named_scope :recent, lambda { |*args| {:limit => (args.first || 3), :order => 'created_at DESC'} }  
 
-  before_save :check_scm
-
   def owned_by(user)
     self.author == user
   end
   
-  def check_scm
-    # Argghhh! I don't like this method...
-    URI.parse(self.scm_location)    
-    self.github = (/^(http|git):\/\/github.com\// === self.scm_location) && URI.parse(self.scm_location)
-    
-    if self.github
-      self.username = self.scm_location.match(/\/\/.+\/(.*)\/.+(\/.+\/|.git)/)[1].to_s
-      self.repository = self.scm_location.match(/\/\/.+\/.+\/(.*)(\/.+\/|.git)/)[1].to_s
-      
-      if (!self.username || !self.repository) 
-        self.github = false 
-      end
-    end
+  def github?
+    scm_location =~ /github.com/    
   end
   
 end
