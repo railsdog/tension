@@ -1,4 +1,3 @@
-require 'ruby-github'
 class Extension < ActiveRecord::Base
   has_permalink :name  
   belongs_to :author, :class_name => 'User', :foreign_key => :user_id, :counter_cache => true
