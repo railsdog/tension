@@ -1,6 +1,6 @@
 class ExtensionsController < ApplicationController
   before_filter :load_data, :only => [:new, :edit, :create, :update]  
-  
+  before_filter :load_extension, :only => [:show, :destroy]
   def index
     respond_to do |format|
       format.html { @extensions = Extension.paginate(:all, :page => params[:page], :order => 'updated_at DESC', :per_page => 3) }
@@ -13,7 +13,6 @@ class ExtensionsController < ApplicationController
   end
 
   def show
-    @extension = Extension.find(params[:id])
     begin
       @commits = GitHub::API.commits(@extension.username, @extension.repository).paginate(:page => params[:page], :order => 'committed_date DESC', :per_page => 5) if @extension.github?
     rescue OpenURI::HTTPError
@@ -63,9 +62,7 @@ class ExtensionsController < ApplicationController
     end
   end
   
-  def destroy
-    @extension = current_user.has_role?(:site_admin) ? Extension.find(params[:id]) : current_user.extensions.find(params[:id])
-    
+  def destroy    
     respond_to do |format|    
       if @extension.destroy
         flash[:notice] = "Spree Extension deleted succesfully."
@@ -82,6 +79,12 @@ class ExtensionsController < ApplicationController
   def load_data
     @available_versions = Version.all
   end
+  
+  def load_extension
+    @extension = object
+  end
 
-
+  def object
+    Extension.find(params[:id])    
+  end
 end

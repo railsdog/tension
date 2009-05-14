@@ -55,5 +55,6 @@
   permission1:
     roles : [site_admin]
     options :
-      except : [index, show]   
+      only : [edit, update, destroy]
+      unless : current_user.id == object.author.id   
 #TODO - allow extension owner to modify their own extensions    
