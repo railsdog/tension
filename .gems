@@ -1,0 +1,5 @@
+rubyist-aasm --version ">=2.0.5" --source "http://gems.github.com"
+json --version ">=1.1.4"
+mash --version ">=0.0.3"
+unicode --version ">=0.1"  
+highline --version '>=1.4.0'
