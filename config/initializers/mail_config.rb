@@ -1,10 +1,11 @@
 # Email settings
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
-  :address => "mail.example.org",
-  :port => 25,
-  :domain => 'example.org',
-  :user_name => 'example@example.org',
-  :password => "",
-  :authentication => :login
+  :address => "smtp.gmail.com",
+  :port => 587,
+  :domain => 'railsdog.com',
+  :user_name => ENV['SMTP_USERNAME'],
+  :enable_starttls_auto => true,  
+  :password => ENV['SMTP_PASSWORD'],
+  :authentication => :plain
 }
