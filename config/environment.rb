@@ -23,7 +23,8 @@ Rails::Initializer.run do |config|
   config.gem "json", :version => ">=1.1.4"
   config.gem "mash", :version => ">=0.0.3"
   config.gem "unicode", :version => ">=0.1"  
-  config.gem "highline", :version => '>=1.4.0'  
+  config.gem "highline", :version => '>=1.4.0'
+  config.gem "openrain-action_mailer_tls", :lib => "smtp_tls.rb", :source => "http://gems.github.com"  
   
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
