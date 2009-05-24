@@ -39,7 +39,7 @@
   </div>
 
   <div class="column span-8 last">
-    <h4 class='versions'><%= APP_CONFIG['tension']['software_name'] %> Extensions Supported</h4>
+    <h4 class='versions'><%= APP_CONFIG['tension']['software_name'] %> Versions Supported</h4>
 	<% if @extension.versions.size > 0 %>
       <% @extension.versions.each do |version| %>
         <%= link_to version.extension_name, version_path(version) %><br/>
@@ -62,7 +62,6 @@
       <div class="column span-6 ">
 	    <p>
 	      <%= link_to @extension.author.name, user_path(@extension.author) %><br/>
-	      Lead Developer at 37Signals
 	    </p>
 	  </div>	
       <div class="column span-1 last">
