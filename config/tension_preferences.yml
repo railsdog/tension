@@ -1,5 +1,5 @@
 tension:
-  site_name: Tension Extensions Directory
-  site_summary: Blah, Blah, Blah...
-  software_name: Tension
-  software_summary: Tension is the complete open source commerce solution for Ruby on Rails originally developed by Sean Schofield. It is completely free to use and is licensed under the New BSD License. 
+  site_name: Spree Extension Directory
+  site_summary: This is an active directory of existing Spree extensions.
+  software_name: Spree
+  software_summary: Spree is the complete open source e-commerce solution for Ruby on Rails originally developed by Sean Schofield. It is completely free to use for both commercial and noncommercial works (New BSD License). 
