@@ -1,5 +1,5 @@
 body {
-  background-color: #333333;
+  background-color: white;
   color: #333;
 }
 
@@ -13,22 +13,40 @@ a:visited {
   text-decoration: none;
 }
 
-#header {
-  border-top: 6px solid #333;
-  background-color: #252571;
-  height: 110px;
-}
-
-#header #logo {
-  padding: 10px 0 10px 0;
-}
-
 #navigation {
-  background-color: #005A96;
-  height: 40px;
-  color: #fff;
+  border-top:5px solid #000000;
+  background: #001526 none repeat scroll 0 0;
+  border-bottom:5px solid #0080CE;
+  height: 126px;  /* need because some height is wrong somewhere... */
+  color: #a7b3bb;
+  padding: 15px 0 0;
 }
 
+#navigation #logo {
+  background:transparent url(/images/spree_logo.png) no-repeat scroll left top;
+  display:inline;
+  float:left;
+  height:110px;
+  overflow:hidden;
+  text-indent:-999em;
+  width:215px;
+}
+
+#navigation #copy {
+  margin:10px 0 0;
+  min-height:85px;
+}
+
+#navigation #copy h2 {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 5px;
+}
+#navigation #copy p {
+  font-size:16px;
+  line-height:1.5em;
+}
 
 #menu {
   background-color: #EAF0FA;
@@ -103,14 +121,15 @@ a:visited {
 
 
 #footer {
-  background-color: #333;
-  color: #fff;
+  background-color: #001526;    /* is transparent in spreecommerce */
+  border-top:5px solid #CCCCCC;
+  color: #A7B3BB;
   padding-top: 20px;
 }
 
 
 #footer h3 {
-  color: #B4D000;
+  color: white;
 }
 
 #content h1 {
@@ -312,29 +331,48 @@ textarea, select {
 
 
 ul#tabnav { /* general settings */
-  text-align: left; /* set to left, right or center */
+  text-align: right;
   margin: 0;
-  list-style-type: none;
+  font-size:14px;
+  list-style-image:none;
+  list-style-position:outside;
+  list-style-type:none;
+  text-align:right;
 }
 
 ul#tabnav li { /* do not change */
-  display: inline;
-  margin-right: 10px;
-  padding: 4px 8px; 
-  color: #fff;
   font-weight: bold;
-  text-transform: uppercase;
+  background:#004B83 url(/images/nav_btn_right.gif) no-repeat scroll right top;
+  display:inline;
+  float:left;
+  margin:0 2px 0 0;
+  padding-right:5px;
 }
 
+ul#tabnav li.active {
+  background:#0080CE url(/images/nav_btn_right_active.gif) no-repeat scroll right top;
+}
 
 ul#tabnav li a { /* settings for all tab links */
-  color: #fff;
-  text-decoration: none;
-  border-bottom: none;
+  background:#004B83 url(/images/nav_btn_left.gif) no-repeat scroll left top;
+  color:#000E1A;
+  display:inline;
+  float:left; 
+  padding:6px 5px 10px 10px;
+  height: 15px; /* not sure why get 21px without this... */
 }
 
+ul#tabnav li.active a { 
+  background:#0080CE url(/images/nav_btn_left_active.gif) no-repeat scroll left top;
+  color:#FFFFFF;
+}
+
+ul#tabnav li a:hover {
+  color: #4dbbff;
+}                  
+
 ul#tabnav li:hover { /* settings for hover effect */
-  background: #B6D2E2; /* set desired hover color */
+  color: white; 
 }
 
 ul#tabnav li.active, ul#tabnav li.active:hover  {
@@ -343,7 +381,7 @@ ul#tabnav li.active, ul#tabnav li.active:hover  {
 }
 
 
-#navigation #logo, #navigation #tabs {
+#navigation #logo {
   padding: 10px 0;
 }
 

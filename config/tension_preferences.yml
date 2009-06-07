@@ -2,5 +2,5 @@ tension:
   site_name: Spree - Extension Directory
   site_summary: This is an active directory of existing Spree extensions.
   software_name: Spree
-  software_summary: Spree is the complete open source e-commerce solution for Ruby on Rails originally developed by Sean Schofield. It is completely free to use for both commercial and noncommercial works (New BSD License). 
+  software_summary: Spree is the open source e-commerce platform created by <a href="http://railsdog.com">Sean Schofield.</a> The project is maintained by a <a href="http://spreecommerce.com/core_team">core team</a> of developers and is freely available for commercial use under the terms of the <a href="http://spreecommerce.com/overview/license">New BSD License</a>. Hosting for this project is provided by <a href="http://www.endpoint.com">End Point</a>.
   site_url: ext.spreecommerce.com
