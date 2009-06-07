@@ -69,28 +69,8 @@
     </div>
     </div>
   </div>
-  
-  <div id='footer'> 
-    <div class='container'> 
 
-      <div class='column span-14 first'>
-      <h3>Tag Cloud</h3>
-      <%= render :partial => 'extensions/tag_cloud' %>
-      </div> 
-      <div class='column span-6'>
-        <h3>About <%= APP_CONFIG['tension']['software_name'] %></h3>
-        <p>
-          <%= APP_CONFIG['tension']['software_summary'] %>
-      </p>
-      </div>    
-      <div class='column last span-4 last'> 
-      <h3>Follow Us</h3>
-      </div>
-    </div>
-
-  </div>  
-  
-  <!-- footer -->   
+  <%= render :partial => 'shared/footer' %>
 
 </body>
 </html>
