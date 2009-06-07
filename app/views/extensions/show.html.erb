@@ -6,7 +6,7 @@
   <div class="column span-24">
     <h3><%= @extension.name  %></h3>
     <div class="column span-10">
-      <span class='posted'>Posted by <%= link_to @extension.author.name, user_path(@extension.author) %> <%= distance_of_time_in_words(Time.now, @extension.created_at) %></span>
+      <span class='posted'>Posted by <%= link_to @extension.author.name, user_path(@extension.author) %> <%= distance_of_time_in_words(Time.now, @extension.created_at) %> ago.</span>
     </div>
     <div class="column span-14 last" id='tagged'>
     <span><strong>Tagged as:&nbsp;&nbsp;</strong>
