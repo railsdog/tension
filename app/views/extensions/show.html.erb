@@ -35,7 +35,7 @@
 
   <div class="column span-16">	
     <h4 class='description'>Description</h4>
-    <%= @extension.description ? simple_format(@extension.description) : "<p><i>There's no description for this extension yet.</i></p>" %>
+    <%= @extension.description ? textilize(@extension.description) : "<p><i>There's no description for this extension yet.</i></p>" %>
   </div>
 
   <div class="column span-8 last">
