@@ -23,14 +23,19 @@ module ApplicationHelper
       content_tag :ul, items, :id => 'tabnav'
   end
 
+  # this version calculates relative popularity, not absolute popularity
+  # eg [1,1,100,100] is very different from [50,50,100,100] 
   def tag_cloud(tags, classes)
     return if tags.empty?
 
-    max_count = tags.sort_by(&:count).last.count.to_f
+    counts = tags.sort_by(&:count)
+    min_count = counts.first.count
+    max_count = counts.last.count
+    count_range = max_count - min_count + 0.1 
 
     tags.each do |tag|
-      index = ((tag.count / max_count) * (classes.size - 1)).round
-      yield tag, classes[index]
+      index = (tag.count - min_count) * classes.size / count_range
+      yield tag, classes[index.truncate]
     end
   end
 
