@@ -1,9 +1,4 @@
 <h1><%= @extensions.total_entries %> Available <%= APP_CONFIG['tension']['software_name'] %> Extensions</h1>
-
-<div class="column span-24">
-  <%= will_paginate @extensions %>
-</div>
-
 <form action="/extensions">
   <p>
     Show only extensions compatible with:
@@ -14,6 +9,10 @@
     <input type="submit" value="Search">
   </p>
 </form>
+
+<div class="column span-24">
+  <%= will_paginate @extensions %>
+</div>
 
 <% for extension in @extensions %>
   <div id='extension'>
@@ -27,7 +26,9 @@
     </div>
 
     <div class="column span-12 last">
-      by <%= link_to extension.author.name, user_path(extension.author) %><br/>
+      by <%= (extension.author && extension.author_name.blank?) ?
+        link_to(extension.author.name, user_path(extension.author)) :
+        extension.author_name %><br/>
       URL: <%= link_to extension.website, extension.website %><br/>
       SCM: <%= link_to extension.scm_location, extension.scm_location %><br/>
       <span class='last_commit'>Last updated: 23 January, 19:34</span>

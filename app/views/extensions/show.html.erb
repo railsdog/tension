@@ -1,5 +1,5 @@
 <% content_for :head do %>
-  <%= stylesheet_link_tag 'github.css' %>      
+  <%= stylesheet_link_tag 'github.css' %>
 <% end %>
 
 <div id='extension'>
@@ -9,11 +9,11 @@
       <span class='posted'>Posted by <%= link_to @extension.author.name, user_path(@extension.author) %> <%= distance_of_time_in_words(Time.now, @extension.created_at) %> ago.</span>
     </div>
     <div class="column span-14 last" id='tagged'>
-    <span><strong>Tagged as:&nbsp;&nbsp;</strong>
-    <% @extension.tag_list.each do |tag| %>
-      <%= link_to tag, tag_path(tag) %>
-    <% end %>
-    </span>
+      <span><strong>Tagged as:&nbsp;&nbsp;</strong>
+        <% @extension.tag_list.each do |tag| %>
+          <%= link_to tag, tag_path(tag) %>
+        <% end %>
+      </span>
     </div>
   </div>
 
@@ -25,11 +25,11 @@
   </div>
 
   <% if logged_in? && (@extension.owned_by(current_user) || current_user.has_role?('site_admin')) -%>
-    <div class="column span-6 last" id='authoring'>	
+    <div class="column span-6 last" id='authoring'>
       <ul id='navlist'>
-	    <li><%= link_to 'Edit', edit_extension_path(@extension) %></li>
-	    <li class='remove'><%= link_to 'Remove', extension_path(@extension), :method => :delete, :confirm => 'Are you sure to delete this extension?' %></li>
-	  </ul>
+        <li><%= link_to 'Edit', edit_extension_path(@extension) %></li>
+        <li class='remove'><%= link_to 'Remove', extension_path(@extension), :method => :delete, :confirm => 'Are you sure to delete this extension?' %></li>
+      </ul>
     </div>
   <% end %>
 
@@ -40,7 +40,7 @@
 
   <div class="column span-8 last">
     <h4 class='versions'><%= APP_CONFIG['tension']['software_name'] %> Versions Supported</h4>
-	<% if @extension.versions.size > 0 %>
+    <% if @extension.versions.size > 0 %>
       <% @extension.versions.each do |version| %>
         <%= link_to version.extension_name, version_path(version) %><br/>
       <% end %>
@@ -50,39 +50,47 @@
   </div>
 
   <div class="column span-16">	
-	<h4 class='url'>URL + SCM</h4>	
+    <h4 class='url'>URL + SCM</h4>
     <ul class='url-list'>
-	  <li><strong>URL:</strong> <%= website_url(@extension) %></li>
-	  <li><strong>SCM:</strong> <%= link_to @extension.scm_location, @extension.scm_location %></li>
-	</ul>
+      <li><strong>URL:</strong> <%= website_url(@extension) %></li>
+      <li><strong>SCM:</strong> <%= link_to @extension.scm_location, @extension.scm_location %></li>
+    </ul>
   </div>
 
   <div class="column span-8 last">
-	<h4 class='author'>Author</h4>
+    <h4 class='author'>Author</h4>
+    <% if @extension.author_name.blank? %>
       <div class="column span-6 ">
-	    <p>
-	      <%= link_to @extension.author.name, user_path(@extension.author) %><br/>
-	    </p>
-	  </div>	
+        <p>
+          <%= link_to @extension.author.name, user_path(@extension.author) %><br/>
+        </p>
+      </div>
       <div class="column span-1 last">
-	    <%= link_to gravatar_for(@extension.author, :size => 40, :class => 'gravatar-mini'), user_path(@extension.author, :title => @extension.author.name) %>
-	  </div>	
-  </div>
-
-
-
+        <%= link_to gravatar_for(@extension.author, :size => 40, :class => 'gravatar-mini'), user_path(@extension.author, :title => @extension.author.name) %>
+      </div>
+    </div>
+  <% else %>
+    <div class="column span-8 ">
+      <p>
+        <%= @extension.author_name %> <br />
+        <% if @extension.author %>
+          (added by: <%= link_to @extension.author.name, user_path(@extension.author) %>)<br/>
+        <% end %>
+      </p>
+    </div>
+  <% end %>
 </div>
 
 <% if @extension.github? %>
 
   <div id="github-commit-badge-container">
-  	<script type="text/javascript">
-  		var Badges = new Array();
-  		Badges[0] = new Object;
-  		Badges[0]["username"] = "<%= @extension.github_username %>";
-  		Badges[0]["repo"] = "<%= @extension.github_project %>";
-  		Badges[0]["branch"] = "master";
-  	</script>
+    <script type="text/javascript">
+      var Badges = new Array();
+      Badges[0] = new Object;
+      Badges[0]["username"] = "<%= @extension.github_username %>";
+      Badges[0]["repo"] = "<%= @extension.github_project %>";
+      Badges[0]["branch"] = "master";
+    </script>
     <%= javascript_include_tag 'jquery.js', 'md5.js', 'humane.js', 'github-commit-badge.js' %>
 
   </div>
