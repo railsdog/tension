@@ -11,7 +11,7 @@ xml.rss :version => "2.0" do
         xml.description extension.description
         xml.pubDate extension.created_at.to_s(:rfc822)
         xml.link extension_url(extension)
-        xml.author extension.author.name
+        xml.author extension.get_author_name
       end
     end
   end

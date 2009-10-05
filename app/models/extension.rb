@@ -18,4 +18,12 @@ class Extension < ActiveRecord::Base
   def github?
     scm_location =~ /github.com/    
   end
+
+  def get_author_name
+    if read_attribute(:author_name).blank? && author
+      author.name
+    else
+      read_attribute(:author_name)
+    end
+  end
 end

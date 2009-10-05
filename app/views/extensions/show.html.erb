@@ -68,17 +68,17 @@
       <div class="column span-1 last">
         <%= link_to gravatar_for(@extension.author, :size => 40, :class => 'gravatar-mini'), user_path(@extension.author, :title => @extension.author.name) %>
       </div>
-    </div>
-  <% else %>
-    <div class="column span-8 ">
-      <p>
-        <%= @extension.author_name %> <br />
-        <% if @extension.author %>
-          (added by: <%= link_to @extension.author.name, user_path(@extension.author) %>)<br/>
-        <% end %>
-      </p>
-    </div>
-  <% end %>
+    <% else %>
+      <div class="column span-8 ">
+        <p>
+          <%= @extension.author_name %> <br />
+          <% if @extension.author %>
+            (added by: <%= link_to @extension.author.name, user_path(@extension.author) %>)<br/>
+          <% end %>
+        </p>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 <% if @extension.github? %>
