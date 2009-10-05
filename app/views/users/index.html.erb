@@ -4,21 +4,21 @@
 
 <% @users.each do |author| %>
 
-  <div class="column span-7" id='author'>  
-	<div class="column span-1"
-  	  <%= gravatar_for(author, :size => 30, :class => 'gravatar-mini') %>
-	</div>
-	<div class="column span-6 last">
+  <div class="column span-7" id='author'>
+    <div class="column span-1"
+    <%= gravatar_for(author, :size => 30, :class => 'gravatar-mini') %>
+  </div>
+  <div class="column span-6 last">
     <strong><%= link_to author.name, user_path(author) %></strong><br/>
     <i>Registered since <%= distance_of_time_in_words(Time.now, author.created_at) %></i><br/>
     <%= author.extensions_count %> extensions
-    </div>
+  </div>
 
-</div>
+  </div>
 
 <% end %>
 
 
-
+<br style="clear:both" />
 <%= will_paginate @authors %>
-	
+
