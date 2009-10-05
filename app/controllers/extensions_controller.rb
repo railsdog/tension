@@ -3,13 +3,30 @@ class ExtensionsController < ApplicationController
   before_filter :load_extension, :only => [:show, :destroy]
   def index
     respond_to do |format|
-      format.html { @extensions = Extension.paginate(:all, :page => params[:page], :order => 'updated_at DESC', :per_page => 3) }
-      format.rss { @extensions = Extension.find(:all, :order => 'updated_at DESC', :limit => 10) }
+      format.html {
+        conditions = params[:version] ? {:version=> params[:version]} : nil
+        @extensions = Extension.paginate(:all,
+          :conditions => conditions,
+          :page => params[:page],
+          :order => 'updated_at DESC',
+          :per_page => 10
+        )
+      }
+      format.rss {
+        @extensions = Extension.find(:all,
+          :order => 'updated_at DESC',
+          :limit => 5
+        )
+      }
     end
   end
   
   def my_extensions
-    @extensions = current_user.extensions.paginate(:all, :page => params[:page], :order => 'updated_at DESC', :per_page => 3)
+    @extensions = current_user.extensions.paginate(:all, 
+      :page => params[:page],
+      :order => 'updated_at DESC',
+      :per_page => 10
+    )
   end
 
   def show

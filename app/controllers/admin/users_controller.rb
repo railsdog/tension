@@ -4,7 +4,7 @@ class Admin::UsersController < ApplicationController
   layout 'admin'  
     
   def index
-    @users = User.paginate(:all, :page => params[:page], :order => 'login DESC', :per_page => 10)
+    @users = User.paginate(:all, :page => params[:page], :order => 'login DESC', :per_page => 25)
   end
 
   def show
