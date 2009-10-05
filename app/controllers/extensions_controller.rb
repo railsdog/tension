@@ -4,13 +4,19 @@ class ExtensionsController < ApplicationController
   def index
     respond_to do |format|
       format.html {
-        conditions = params[:version] ? {:version=> params[:version]} : nil
-        @extensions = Extension.paginate(:all,
-          :conditions => conditions,
+        options = {
           :page => params[:page],
-          :order => 'updated_at DESC',
+          :order => 'extensions.updated_at DESC',
           :per_page => 10
-        )
+        }
+        if params[:versions]
+          options.merge!({
+              :include => :versions, 
+              :conditions => ["extensions_versions.version_id IN (?)", params[:versions].map(&:to_i)]      
+            })
+        end
+          
+        @extensions = Extension.paginate(:all, options)
       }
       format.rss {
         @extensions = Extension.find(:all,
