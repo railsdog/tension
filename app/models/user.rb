@@ -70,6 +70,12 @@ class User < ActiveRecord::Base
     write_attribute :email, (value ? value.downcase : nil)
   end
 
+  def deliver_password_reset_instructions!
+    reset_perishable_token!
+    UserMailer.deliver_password_reset_instructions(self)
+  end
+
+
   protected
     
   def make_activation_code
@@ -82,5 +88,39 @@ class User < ActiveRecord::Base
     extensions.each do |e|
       e.update_attribute(:author_name, e.author_name.blank? ? self.name : e.author_name)
     end
+  end
+
+  # Resets the perishable token to a random friendly token.
+  def reset_perishable_token
+    self.perishable_token = self.class.make_token
+  end
+
+  # Same as reset_perishable_token, but then saves the record afterwards.
+  def reset_perishable_token!
+    update_attribute(:perishable_token, reset_perishable_token)
+  end
+
+
+  # Use this methdo to find a record with a perishable token. This method does 2 things for you:
+  #
+  # 1. It ignores blank tokens
+  # 2. It enforces the perishable_token_valid_for configuration option.
+  #
+  # If you want to use a different timeout value, just pass it as the second parameter:
+  #
+  #   User.find_using_perishable_token(token, 1.hour)
+  def self.find_using_perishable_token(token, age = 10.minutes)
+    return if token.blank?
+    age = age.to_i
+
+    conditions_sql = "perishable_token = ?"
+    conditions_subs = [token]
+
+    if column_names.include?("updated_at") && age > 0
+      conditions_sql += " and updated_at > ?"
+      conditions_subs << age.seconds.ago
+    end
+
+    find(:first, :conditions => [conditions_sql, *conditions_subs])
   end
 end

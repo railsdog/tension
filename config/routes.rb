@@ -8,7 +8,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users, :as => 'authors'
 
   map.resource :session
-
+  map.resources :password_resets
 
   map.resources :extensions, :collection => {:my_extensions => :get}
   map.resources :versions, :only => [:show]

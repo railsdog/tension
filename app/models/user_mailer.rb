@@ -11,6 +11,13 @@ class UserMailer < ActionMailer::Base
     @subject    += 'Your account has been activated!'
     @body[:url]  = "http://#{APP_CONFIG['tension']['site_url']}/"
   end
+
+  def password_reset_instructions(user)
+    default_url_options[:host] = APP_CONFIG['tension']['site_url']
+    setup_email(user)
+    @subject+=    "Password Reset Instructions"
+    @body[:edit_password_reset_url] = edit_password_reset_url(user.perishable_token)
+  end  
   
   protected
   def setup_email(user)
