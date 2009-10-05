@@ -53,8 +53,13 @@
     roles : [site_admin]
 'ExtensionsController':  
   permission1:
+    roles : [site_admin, extension_team]
+    options :
+      only : [edit, update]
+      unless : current_user.id == object.author.id
+  permission2:
     roles : [site_admin]
     options :
-      only : [edit, update, destroy]
-      unless : current_user.id == object.author.id   
+      only : [destroy]
+      unless : current_user.id == object.author.id
 #TODO - allow extension owner to modify their own extensions    

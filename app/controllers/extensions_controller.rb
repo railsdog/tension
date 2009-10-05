@@ -1,6 +1,9 @@
 class ExtensionsController < ApplicationController
   before_filter :load_data, :only => [:new, :edit, :create, :update]  
   before_filter :load_extension, :only => [:show, :destroy]
+
+  include ExtensionsHelper
+  
   def index
     respond_to do |format|
       format.html {
@@ -58,15 +61,23 @@ class ExtensionsController < ApplicationController
   
   def edit
     begin
-      @extension = current_user.has_role?(:site_admin) ? Extension.find(params[:id]) : current_user.extensions.find(params[:id])
+      @extension = Extension.find(params[:id])
+      unless can_edit_extension?
+        flash[:error] = "You can't edit this extension!" 
+        redirect_to extensions_url
+      end
     rescue ActiveRecord::RecordNotFound
-      flash[:error] = "Extension not found as yours!" 
+      flash[:error] = "Could not find extension with that id!"
       redirect_to extensions_url
     end
   end
   
   def update
-    @extension = current_user.has_role?(:site_admin) ? Extension.find(params[:id]) : current_user.extensions.find(params[:id])
+    @extension = Extension.find(params[:id])
+    unless can_edit_extension?
+      flash[:error] = "You can't edit this extension!"
+      redirect_to extensions_url
+    end
     respond_to do |format|
       if @extension.update_attributes(params[:extension])
         flash[:notice] = "Spree Extension updated succesfully."
