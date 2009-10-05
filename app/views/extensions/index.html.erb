@@ -31,7 +31,7 @@
         extension.author_name %><br/>
       URL: <%= link_to extension.website, extension.website %><br/>
       SCM: <%= link_to extension.scm_location, extension.scm_location %><br/>
-      <span class='last_commit'>Last updated: 23 January, 19:34</span>
+      <span class='last_commit'>Last updated at: <%= get_last_update_date(extension) %></span>
     </div>
 
   </div>

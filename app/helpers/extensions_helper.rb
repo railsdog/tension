@@ -16,4 +16,23 @@ module ExtensionsHelper
       extension.owned_by(current_user) || current_user.has_role?('site_admin') 
     )
   end
+  
+  def github_api_url(user, project)
+    "http://github.com/api/v1/json/#{user.strip}/#{project.strip}/commits/master"
+  end
+
+  def get_last_update_date(extension)
+    if extension.github?
+      api_url = github_api_url(extension.github_username, extension.github_project)
+      parsed_response = Cache.get(api_url, 24.hours){
+        response = Net::HTTP.get_response(URI.parse(api_url) )
+        JSON.parse(response.body) rescue nil
+      }
+      if parsed_response
+        last_update_at = Time.parse(parsed_response["commits"].first["authored_date"])
+        return(time_ago_in_words(last_update_at)+" (from github)")
+      end
+    end
+    "no data available"
+  end
 end
