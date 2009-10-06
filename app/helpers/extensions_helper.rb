@@ -30,9 +30,15 @@ module ExtensionsHelper
       }
       if parsed_response
         last_update_at = Time.parse(parsed_response["commits"].first["authored_date"])
-        return(time_ago_in_words(last_update_at)+" (from github)")
+        return(time_ago_in_words(last_update_at)+" ago (from github)")
       end
     end
-    "no data available"
+    nil
+  end
+
+  def extension_author(extension)
+    (extension.author && extension.author_name.blank?) ?
+      link_to(extension.author.name, user_path(extension.author)) :
+      extension.author_name
   end
 end

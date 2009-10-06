@@ -18,7 +18,7 @@
   <div id='extension'>
 
     <div class="column span-24">
-      <h3><%= link_to extension.name, extension_path(extension) %></h3>
+      <h3><%= link_to(extension.name, extension_path(extension)) %> <span class="grey">by</span> <%= extension_author(extension) %></h3>
     </div>
 
     <div class="column span-11 append-1">
@@ -26,12 +26,10 @@
     </div>
 
     <div class="column span-12 last">
-      by <%= (extension.author && extension.author_name.blank?) ?
-        link_to(extension.author.name, user_path(extension.author)) :
-        extension.author_name %><br/>
       URL: <%= link_to extension.website, extension.website %><br/>
-      SCM: <%= link_to extension.scm_location, extension.scm_location %><br/>
-      <span class='last_commit'>Last updated at: <%= get_last_update_date(extension) %></span>
+      <% if get_last_update_date(extension) %>
+        <span class='last_commit'>Last update: <%= get_last_update_date(extension) %></span>
+      <% end %>
     </div>
 
   </div>

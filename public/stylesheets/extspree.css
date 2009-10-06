@@ -179,6 +179,11 @@ a:visited {
   display: block;
 }
 
+#extension .grey {
+  font-size: 0.8em;
+  color: #ddd;
+}
+
 
 #extension h4.description {
   background: #eee url('/images/icons/description.png') 10px 50% no-repeat; 
