@@ -28,7 +28,7 @@ namespace :deploy do
   end
 end
 
-set :shared_assets, ['config/database.yml']
+set :shared_assets, ['config/database.yml', 'config/initializers/mail_config.rb']
 
 namespace :spree do
   task :create_symlinks, :roles => :app do
