@@ -40,7 +40,7 @@
     </div>
   <% end %>
 
-  <div class="column span-16">	
+  <div class="column span-16">
     <h4 class='description'>Description</h4>
     <%= @extension.description ? textilize(@extension.description) : "<p><i>There's no description for this extension yet.</i></p>" %>
   </div>
@@ -56,7 +56,7 @@
     <% end %>
   </div>
 
-  <div class="column span-16">	
+  <div class="column span-16">
     <h4 class='url'>URL + SCM</h4>
     <ul class='url-list'>
       <li><strong>URL:</strong> <%= website_url(@extension) %></li>
@@ -105,6 +105,6 @@
 <% end %>
 
 
-<div class="column span-24">	
+<div class="column span-24">
   <%= link_to "Back to  #{APP_CONFIG['tension']['software_name']} Extensions List", extensions_url %>
 </div>

@@ -27,3 +27,17 @@ namespace :deploy do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
 end
+
+set :shared_assets, ['config/database.yml']
+
+namespace :spree do
+  task :create_symlinks, :roles => :app do
+    shared_assets.each do |asset|
+      origin_path = File.join(shared_path, asset)
+      destination_path = File.join(release_path, asset)
+      run "ln -nsf #{origin_path} #{destination_path}"
+    end
+  end
+end
+
+after 'deploy:update_code', 'spree:create_symlinks'
