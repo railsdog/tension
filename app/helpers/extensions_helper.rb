@@ -13,10 +13,10 @@ module ExtensionsHelper
 
   def can_remove_extension?(extension = @extension)
     logged_in? && (
-      extension.owned_by(current_user) || current_user.has_role?('site_admin') 
+      extension.owned_by(current_user) || current_user.has_role?('site_admin')
     )
   end
-  
+
   def github_api_url(user, project)
     "http://github.com/api/v1/json/#{user.strip}/#{project.strip}/commits/master"
   end
@@ -29,8 +29,8 @@ module ExtensionsHelper
         JSON.parse(response.body) rescue nil
       }
       if parsed_response
-        last_update_at = Time.parse(parsed_response["commits"].first["authored_date"])
-        return(time_ago_in_words(last_update_at)+" ago (from github)")
+        last_update_at = Time.parse(parsed_response["commits"].first["authored_date"]) rescue ""
+        return last_update_at.blank? ? "" : time_ago_in_words(last_update_at)+" ago (from github)"
       end
     end
     nil
